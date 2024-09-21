@@ -1,0 +1,75 @@
+:root{
+    --main-color:rgb(25, 155, 84);
+    --main-light:rgb(219, 255, 229);
+}
+*{
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+}
+.bg-success{
+    background-color:var(--main-color) !important;
+}
+
+.text-success {
+    color: var(--main-color) !important;
+}
+.btn-success{
+        background-color: var(--main-color) !important;
+}
+
+/*============== hero section =========== */
+
+.hero{
+    min-height: 480px;
+    background-color: var(--main-light);
+            overflow: hidden;
+}
+.hero p{
+    text-align: justify;
+}
+.main-img{
+    position: relative;
+}
+.main-img img{
+    position: relative;
+    z-index: 10;
+}
+.img-bg{
+    height: 340px;
+    width: 440px;
+    position: absolute;
+    border-radius: 42%;
+    top: 70px;
+    left: 70px;
+    transform: rotate(130deg);
+    background-color: rgb(171, 232, 200);
+}
+.p-top{
+    height: 70px;
+    width: 120px;
+    background-color: rgb(171, 232, 200);
+    position: absolute;
+    border-radius: 48%;
+    top: -18px;
+    right: -100px;
+    transform: rotate(130deg);
+}
+
+.p-bottom {
+    height: 48px;
+    width: 65px;
+    background-color: rgb(171, 232, 200);
+    position: absolute;
+    border-radius: 48%;
+    bottom: 10px;
+    right: 10px;
+    transform: rotate(130deg);
+}
+
+
+/*============== category section =========== */
+.icon-bg{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
