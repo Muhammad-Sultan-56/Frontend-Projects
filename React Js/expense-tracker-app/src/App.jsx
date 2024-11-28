@@ -3,11 +3,30 @@ import "./App.css";
 import IncomeModal from "./components/IncomeModal";
 import ExpenseModal from "./components/ExpenseModal";
 
+import { Flip, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
-  const [income, setIncome] = useState(0);
+  // success notification
+  const successNotify = () =>
+    toast.success("Congrats! Operation successful.", {
+      autoClose: 2000,
+      transition: Flip,
+    });
+
+  const [income, setIncome] = useState(() => {
+    const storedIncome = JSON.parse(localStorage.getItem("income"));
+    return storedIncome ? storedIncome : 0;
+  });
+
   const [balance, setBalance] = useState(0);
   const [totalExpense, setTotalExpense] = useState(0);
-  const [expenses, setExpenses] = useState([]);
+
+  const [expenses, setExpenses] = useState(() => {
+    const storedExpenses = JSON.parse(localStorage.getItem("expenses"));
+    return storedExpenses ? storedExpenses : [];
+  });
+
   const [isIncomModalOpen, setIsIncomModalOpen] = useState(false);
   const [isExpenseModalOpen, setIsExpenseModalOpen] = useState(false);
 
@@ -36,11 +55,13 @@ function App() {
     // es6 +amount is converting string amount to number
     setIncome(income + +amount);
     handleIncomModalClose();
+    successNotify();
   };
 
   // add expense func
   const addExpense = (expeseObj) => {
     const newExpAr = [...expenses, expeseObj];
+    successNotify();
 
     // update remaining balance
     setExpenses(newExpAr);
@@ -56,6 +77,10 @@ function App() {
 
     setBalance(income - totalExp);
     setTotalExpense(totalExp);
+
+    // save in local storage
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+    localStorage.setItem("income", JSON.stringify(income));
   }, [expenses, income]);
 
   // remove/delete
@@ -138,6 +163,8 @@ function App() {
           </table>
         </div>
       </div>
+
+      <ToastContainer />
     </>
   );
 }
